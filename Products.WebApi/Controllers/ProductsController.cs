@@ -21,5 +21,17 @@ namespace Products.WebApi.Controllers
             }
             return Ok(reponse);
         }
+
+        [HttpGet("AddProducts")]
+        public async Task<ActionResult<AddProductsResponse>> AddProducts()
+
+        {
+            var reponse = await _messageBus.InvokeAsync<AddProductsResponse>(new AddProductsRequest());
+            if (reponse == null)
+            {
+                return NotFound();
+            }
+            return Ok(reponse);
+        }
     }
 }
